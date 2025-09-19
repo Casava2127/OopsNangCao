@@ -2,6 +2,7 @@ package com.example.demo.store.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -18,6 +19,7 @@ public class Product {
     private String name;
     private double price;
 
-    // getters/setters
-
+    // 1 Product có thể nằm trong nhiều OrderItem
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems;
 }

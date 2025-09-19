@@ -2,6 +2,7 @@ package com.example.demo.store.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,5 +19,7 @@ public class User {
     private String username;
     private String email;
 
-    // getters/setter
+    // 1 User có nhiều Order
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
 }

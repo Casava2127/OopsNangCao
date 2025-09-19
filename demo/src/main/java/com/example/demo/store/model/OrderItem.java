@@ -11,16 +11,20 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class OrderItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long productId;
     private int quantity;
-    private double price; // price at time of order
+    private double price; // giá tại thời điểm order
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
+    // Nhiều OrderItem thuộc về 1 Order
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
+
+    // Mỗi OrderItem đại diện cho 1 Product
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }
